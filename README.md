@@ -5,21 +5,14 @@
 
 **https://olehvitkalg.github.io/lembergtrans-preview/**
 
-## Одна збірка на все
+## Що тут
 
-10 сторінок: Home · Services · Fleet · Coverage · Technology · About · Blog · Contact ·
-Request a Quote · Privacy Policy.
+Одна збірка, 10 сторінок: Home · Services · Fleet · Coverage · Technology · About · Blog ·
+Contact · Request a Quote · Privacy Policy.
 
-Ця ж збірка йде на імпорт у Figma через плагін **html.to.design** — усе, що плагін зазвичай
-не переносить, тут переведено в реальні вузли DOM:
-
-- іконки — **inline SVG**, а не іконковий шрифт (Font Awesome Free 6.5.2, CC BY 4.0, `assets/icons/`)
-- хайлайти, світіння, смужки, галочки, «+» в акордеоні — реальні `<span>` та `<svg>`,
-  а не `::before` / `::after` і не CSS-маски
-- прозорість скляних панелей підібрана так, щоб макет виглядав правильно навіть якщо
-  імпорт загубить `backdrop-filter`
-
-Зовнішніх залежностей майже немає — тільки Roboto з Google Fonts.
+Статичний HTML/CSS без збірників і фреймворків. Іконки — inline SVG
+(Font Awesome Free 6.5.2, CC BY 4.0, `assets/icons/`). Єдина зовнішня залежність — Roboto
+з Google Fonts.
 
 У квадратних дужках `[...]` — дані, які ще має надати клієнт. Вигаданих цифр тут немає.
 
@@ -43,5 +36,15 @@ Request a Quote · Privacy Policy.
 
 ## Оновлення
 
-Джерело — `D:\Claude\Lemberg\lembergtrans\`. Правки вносяться там, потім папка копіюється сюди
-і пушиться. Файли в цьому репозиторії напряму не правимо.
+Джерело — `D:\Claude\Lemberg\lembergtrans\`. Правки вносяться там, далі:
+
+```bash
+python tools/deploy-preview.py
+cd lembergtrans-preview && git add -A && git commit -m "..." && git push
+```
+
+Скрипт копіює збірку, штампує CSS хешем вмісту і перевіряє, що `noindex` на місці.
+Штамп потрібен тому, що GitHub Pages віддає CSS із `max-age=600` — без нього десять хвилин
+після пуша видно стару таблицю стилів.
+
+Файли в цьому репозиторії напряму не правимо — їх перезапише наступний деплой.
