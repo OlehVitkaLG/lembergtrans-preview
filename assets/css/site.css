@@ -479,3 +479,92 @@ footer.site a:hover{color:var(--orange)}
 /* прототипна смужка */
 .proto{background:#111827;color:#F3F4F6;font-size:13px;padding:9px 0;text-align:center}
 .proto b{color:#FFB27A}
+
+
+/* ==========================================================================
+   FIGMA BUILD — надбудова над site.css
+   Мета: щоб html.to.design переніс дизайн повністю.
+   Псевдоелементи, CSS-маски й іконковий шрифт у Figma не потрапляють,
+   тому тут вони вимкнені, а замість них — реальні вузли в розмітці.
+   ВІЗУАЛЬНО файл ідентичний до site.css.
+   ========================================================================== */
+
+/* 3.1 вимикаємо все, що малювалося псевдоелементами */
+.glass-card::before,
+.glass-card::after,
+.band::after,
+.phero .wrap::after,
+.card.path::before,
+.checks li::before,
+.faq summary::after,
+nav.main a::after,
+.hero::after{content:none !important;display:none !important}
+
+/* 3.2 реальні вузли замість них */
+
+/* помаранчеве світіння (було .band::after / .phero .wrap::after) */
+.glow{
+  position:absolute;pointer-events:none;border-radius:50%;
+  background:var(--orange-2);opacity:.16;filter:blur(60px);
+}
+.band .glow{right:-40px;bottom:-70px;width:320px;height:200px}
+.phero .wrap .glow{right:-60px;top:-60px;width:280px;height:280px;opacity:.16;filter:blur(70px)}
+
+/* верхня помаранчева смужка на картках-входах (було .card.path::before) */
+.path-bar{
+  position:absolute;left:30px;right:30px;top:0;height:4px;
+  background:var(--orange);border-radius:0 0 4px 4px;
+}
+
+/* хайлайт і світіння скляної картки (було .glass-card::before / ::after) */
+.gc-line{
+  position:absolute;left:0;top:0;width:100%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+}
+.gc-glow{
+  position:absolute;left:20%;bottom:-40px;width:60%;height:70px;pointer-events:none;
+  background:var(--orange-2);opacity:.12;filter:blur(40px);
+}
+
+/* галочки в списках (було CSS-маскою на .checks li::before) */
+.checks li{padding-left:32px}
+.ic-check{
+  position:absolute;left:0;top:.30em;width:18px;height:18px;
+  color:var(--orange);fill:var(--orange);
+}
+
+/* плюс/мінус в акордеоні (було .faq summary::after) */
+.q-mark{float:right;color:var(--orange);font-size:24px;line-height:1;font-weight:700}
+
+/* активний пункт меню (було nav.main a::after) */
+nav.main a.active{border-bottom:2px solid var(--orange);padding-bottom:4px}
+
+/* світлий серпанок над фото на мобільному (було .hero::after) */
+.hero-veil{display:none}
+@media(max-width:900px){
+  .hero-veil{
+    display:block;position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.74) 0%,rgba(255,255,255,.42) 46%,rgba(255,255,255,.18) 100%);
+  }
+}
+
+/* 3.3 inline SVG замість іконкового шрифту */
+.ic{height:1em;width:auto;display:inline-block;vertical-align:-.125em;flex:none}
+.card .ico .ic,.glass .ico .ic,.cbox .ico .ic{height:1.05em}
+.fsoc .ic{height:16px}
+
+/* 3.4 менше залежності від backdrop-filter:
+   Figma-імпорт часто губить розмиття, тому базова заливка щільніша —
+   візуально різниця мінімальна, але без блюру макет не «просвічує» */
+.hero-inner{
+  background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,255,255,.52));
+}
+@media(max-width:900px){
+  .hero-inner{background:linear-gradient(135deg,rgba(255,255,255,.90),rgba(255,255,255,.78))}
+}
+.glass-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.07));
+}
+.sec.dark .card,.sec.ink .card,.sec.orange .card{
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.07));
+}
