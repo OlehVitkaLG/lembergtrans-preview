@@ -549,9 +549,13 @@ nav.main a.active{border-bottom:2px solid var(--orange);padding-bottom:4px}
 }
 
 /* 3.3 inline SVG замість іконкового шрифту */
-.ic{height:1em;width:auto;display:inline-block;vertical-align:-.125em;flex:none}
-.card .ico .ic,.glass .ico .ic,.cbox .ico .ic{height:1.05em}
-.fsoc .ic{height:16px}
+/* Квадратний бокс + preserveAspectRatio за замовчуванням: іконка вписується без спотворення.
+   width:auto тут не можна — усередині flex-контейнера (а .btn саме такий) SVG без власних
+   розмірів отримує ширину 0 і стрілки в кнопках зникають. */
+.ic{width:1em;height:1em;display:inline-block;vertical-align:-.125em;flex:none}
+.card .ico .ic,.glass .ico .ic,.cbox .ico .ic{width:1.15em;height:1.15em}
+.fsoc .ic{width:16px;height:16px}
+.step .n .ic,.btn .ic{width:1em;height:1em}
 
 /* 3.4 менше залежності від backdrop-filter:
    Figma-імпорт часто губить розмиття, тому базова заливка щільніша —
