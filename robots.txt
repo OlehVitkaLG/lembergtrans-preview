@@ -1,2 +1,13 @@
+# Staging preview of lembergtrans.com — must stay out of search results.
+#
+# Indexing is blocked by <meta name="robots" content="noindex, nofollow">
+# on every page. Crawling is deliberately ALLOWED so that crawlers can
+# actually read that tag: a "Disallow: /" here would stop them from seeing
+# the noindex, and Google could still list the bare URL it found elsewhere.
+#
+# Note: for a GitHub Pages *project* page this file is not read at all —
+# crawlers only fetch robots.txt from the domain root
+# (olehvitkalg.github.io/robots.txt). The meta tag is what does the work.
+
 User-agent: *
-Disallow: /
+Allow: /
