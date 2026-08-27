@@ -476,15 +476,12 @@ nav.main a.active::after{transform:scaleX(1)}
 }
 
 /* ---------- footer ---------- */
+/* остання секція перед футером віддає свій фон під його заокруглені кути */
+.sec:last-of-type{padding-bottom:calc(80px + var(--r-block));margin-bottom:calc(0px - var(--r-block))}
 footer.site{background:var(--navy);color:#93A3BC;padding:70px 0 0;font-size:15px;
   border-radius:var(--r-block) var(--r-block) 0 0;margin-top:0;position:relative}
-/* Підкладка рівно під заокругленими кутами футера: без зазору над ним,
-   тому смуги не видно — сірий проглядає лише у двох вирізах під радіусом.
-   z-index:-1 кладе підкладку під футер, але над фоном сторінки. */
-footer.site::after{
-  content:"";position:absolute;left:0;right:0;top:0;height:var(--r-block);
-  background:#4B5563;z-index:-1;
-}
+/* Під заокругленими кутами футера нічого не підкладаємо: у вирізи
+   проглядає фон сторінки, тобто той самий колір, що й у секції над футером. */
 footer.site h4{color:#fff;font-size:15px;margin:0 0 18px;letter-spacing:.02em}
 footer.site a{color:#B9C4D6}
 footer.site a:hover{color:var(--orange)}
