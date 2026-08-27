@@ -188,7 +188,6 @@ nav.main a.active::after{transform:scaleX(1)}
 .hero h1{color:var(--ink);margin-bottom:.3em;font-size:clamp(32px,4.4vw,60px)}
 .hero p{font-size:18px;color:#374151;margin-bottom:0}
 .hero .btns{margin-top:28px}
-.hero-note{margin-top:22px;font-size:15px;font-weight:500;color:var(--body)}
 .hero-mob{display:none}
 
 /* --- планшет / мобільний: фото лишається фоном ---
@@ -216,8 +215,7 @@ nav.main a.active::after{transform:scaleX(1)}
   .hero{min-height:560px;padding-bottom:130px;background-position:62% center}
   .hero-inner{padding:22px 18px 24px}
   /* адреса дублюється у topbar і футері — на телефоні прибираємо, щоб панель була нижча */
-  .hero-note{display:none}
-}
+  }
 
 /* ---------- page hero (внутрішні сторінки) ---------- */
 .phero{padding:26px 0 0}
@@ -454,20 +452,38 @@ nav.main a.active::after{transform:scaleX(1)}
 .sec.dark .tbd-block b,.sec.ink .tbd-block b{color:#FFF3C4}
 
 
-/* ---------- стрічка вертикальних фото ---------- */
-.photo-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.photo-strip img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;
-  border-radius:var(--r);box-shadow:var(--sh-card);
+
+/* ---------- слайдер команди ---------- */
+.slider{position:relative;display:flex;align-items:center;gap:10px;margin-top:26px}
+.slider-track{
+  display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;padding:4px;scrollbar-width:none;
 }
-.strip-note{margin:20px 0 0;text-align:center;font-size:14.5px;color:var(--dim)}
-@media(max-width:760px){
-  .photo-strip{grid-template-columns:repeat(2,1fr);gap:12px}
+.slider-track::-webkit-scrollbar{display:none}
+.slider-track .person{flex:0 0 calc((100% - 48px)/3);scroll-snap-align:start}
+.slider-btn{
+  flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+  background:#fff;color:var(--ink);font-size:24px;line-height:1;cursor:pointer;
+  box-shadow:var(--sh-card);transition:.25s;
+}
+.slider-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+@media(max-width:900px){
+  .slider-track .person{flex:0 0 calc((100% - 24px)/2)}
+}
+@media(max-width:600px){
+  .slider-track .person{flex:0 0 78%}
+  .slider-btn{display:none}
 }
 
 /* ---------- footer ---------- */
 footer.site{background:var(--navy);color:#93A3BC;padding:70px 0 0;font-size:15px;
-  border-radius:var(--r-block) var(--r-block) 0 0;margin-top:20px}
+  border-radius:var(--r-block) var(--r-block) 0 0;margin-top:20px;position:relative}
+/* смуга під футером: закриває зазор і вирізи під заокругленнями,
+   z-index:-1 кладе її під сам футер, але над фоном сторінки */
+footer.site::after{
+  content:"";position:absolute;left:0;right:0;top:-20px;height:60px;
+  background:#4B5563;z-index:-1;
+}
 footer.site h4{color:#fff;font-size:15px;margin:0 0 18px;letter-spacing:.02em}
 footer.site a{color:#B9C4D6}
 footer.site a:hover{color:var(--orange)}
@@ -484,7 +500,9 @@ footer.site a:hover{color:var(--orange)}
   width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.07);display:flex;
   align-items:center;justify-content:center;color:#C7D0DE;font-size:15px;transition:.25s;
 }
-.fsoc a:hover{background:var(--orange);color:#fff;transform:translateY(-3px)}
+/* специфічність вища за footer.site a:hover — інакше іконка стає
+   помаранчевою на помаранчевому і зникає */
+footer.site .fsoc a:hover{background:var(--orange);color:#fff;transform:translateY(-3px)}
 .fbot{
   border-top:1px solid rgba(255,255,255,.08);margin-top:54px;padding:24px 0;
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13.5px;color:#6F7F99;
