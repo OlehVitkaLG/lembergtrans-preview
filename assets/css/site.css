@@ -235,7 +235,12 @@ nav.main a.active::after{transform:scaleX(1)}
 @media(max-width:700px){.phero .wrap{padding:34px 26px 38px;border-radius:24px}}
 
 /* ---------- біла панель зі статистикою (як stats bar на сайті) ---------- */
-.sec.facts-band,.facts-band{padding:0;margin-top:-56px;position:relative;z-index:5}
+.sec.facts-band,.facts-band{
+  padding:0;margin-top:-56px;position:relative;z-index:5;
+  /* верхні 56px секції лежать поверх фото в hero — там фон лишається прозорим,
+     нижче йде той самий #F5F7FA, що й у наступній секції */
+  background:linear-gradient(to bottom,transparent 0 56px,var(--alt) 56px);
+}
 .facts-band .wrap{
   background:#fff;border-radius:var(--r);box-shadow:var(--sh-panel);
   padding:30px 40px;
@@ -252,7 +257,8 @@ nav.main a.active::after{transform:scaleX(1)}
 .glass span{font-size:14.5px;color:var(--dim)}
 @media(max-width:860px){.glass-row{grid-template-columns:repeat(2,1fr);gap:10px}}
 @media(max-width:900px){
-  .sec.facts-band,.facts-band{margin-top:0;padding:0 0 10px}
+  /* на мобільному накладання немає — фон суцільний */
+  .sec.facts-band,.facts-band{margin-top:0;padding:0 0 10px;background:var(--alt)}
   .facts-band .wrap{padding:24px 20px}
 }
 
