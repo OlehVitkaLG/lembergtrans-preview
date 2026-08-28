@@ -143,6 +143,30 @@ nav.main a.active::after{transform:scaleX(1)}
   header.site .wrap{height:72px;padding:0 20px}
 }
 
+/* ---------- мобільне меню ---------- */
+.burger .ic{width:22px;height:22px}
+.mnav{position:absolute;left:0;right:0;top:100%;display:none}
+.mnav.open{display:block}
+.mnav-inner{
+  max-width:calc(var(--wrap) + 44px);margin:0 auto;
+  background:#fff;border-radius:var(--r);box-shadow:var(--sh-panel);
+  padding:8px 20px 18px;
+  animation:mnav-in .2s ease both;
+}
+@keyframes mnav-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.mnav-links{display:flex;flex-direction:column}
+.mnav-links a{
+  color:var(--ink);font-weight:600;font-size:16.5px;padding:14px 2px;
+  border-bottom:1px solid rgba(17,24,39,.08);
+}
+.mnav-links a:last-child{border-bottom:0}
+.mnav-links a.active{color:var(--orange)}
+.mnav-cta{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.mnav-cta .head-phone{
+  color:var(--ink);font-weight:800;font-size:18px;text-align:center;padding:6px 0;
+}
+.mnav-cta .btn{display:flex;justify-content:center}
+
 /* ---------- glass-card — точний рецепт із поточного сайту ---------- */
 .glass-card{
   position:relative;overflow:hidden;
